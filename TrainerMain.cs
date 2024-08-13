@@ -64,10 +64,10 @@ namespace AssaultCubeTrainer
                                         m.WriteMemory(viewYAddress, "float", targetPitch.ToString());
                                     }
                                 }
-                                catch (Exception)
+                                catch (Exception e)
                                 {
 
-                                    throw;
+                                    Console.WriteLine(e.Message);
                                 }
                                 
                             }
