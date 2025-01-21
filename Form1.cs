@@ -49,36 +49,35 @@ namespace AssaultCubeTrainer
         
         private void AttachGameButton_Click(object sender, EventArgs e)
         {
-            if (!trainer.isAttached)
-            {
-                trainer.TryStartHacking(gameProcessTextBox.Text);
-                if (trainer.isAttached)
-                {
-                    //MessageBox.Show("Game attached");
-                    Console.WriteLine("Game attached");
-                }
-                else
-                {
-                    MessageBox.Show("Game not found");
-                }
-            }
-            else
+            if (trainer.isAttached)
             {
                 MessageBox.Show("Game already attached");
+                return ;
             }
+
+            trainer.TryStartHacking(gameProcessTextBox.Text);
+            if (trainer.isAttached)
+            {
+                gameProcessIdTextBox.Text = trainer.gameProcessId;
+                Console.WriteLine("Game attached");
+                return;
+            }
+            MessageBox.Show("Game not found");
+            return ;
         }
 
         private void setLifeBut_Click(object sender, EventArgs e)
         {
-            if(trainer.isAttached)
-            {
-                string lifeValue = LifeInput.Value.ToString();
-                trainer.TrySetLife(lifeValue);
-                debugTextBox.Text+= "Life set to: " + lifeValue+"\n";
-            } else
+            if(!trainer.isAttached)
             {
                 MessageBox.Show("Game is not attached");
-            }
+                return ;
+            } 
+            string lifeValue = LifeInput.Value.ToString();
+            trainer.TrySetLife(lifeValue);
+            debugTextBox.Text+= "Life set to: " + lifeValue+"\n";
+            
+            
         }
         private void setAttbutton_Click(object sender, EventArgs e)
         {
@@ -89,6 +88,7 @@ namespace AssaultCubeTrainer
                 string grenadesValue = GrenadesInput.Value.ToString();
                 trainer.TrySetAttributes(lifeValue, ammoValue, grenadesValue);
                 debugTextBox.Text += "Attributes set to: HP:" + lifeValue + " ammo1:" + ammoValue + " grenades:" + grenadesValue + "\n";
+                return ;
             }
         }
 

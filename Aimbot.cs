@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,34 +9,38 @@ namespace AssaultCubeTrainer
 {
     internal class Aimbot
     {
-        public static void CalculateAim(Entity localPlayer, Entity targetPlayer, float tolerance, out float targetPitch, out float targetYaw, out bool changeVision)
+        public static void CalculateAim(Entity localPlayer, Entity targetPlayer, out float targetPitch, out float targetYaw, out bool changeVision)
         {
-            // Vetor direção do jogador alvo em relação ao jogador local
-            float deltaX = targetPlayer.x - localPlayer.x;
-            float deltaY = targetPlayer.y - localPlayer.y;
-            float deltaZ = targetPlayer.z - localPlayer.z;
+            // Calcular as diferenças entre as posições do alvo e do jogador local
+            float dx = targetPlayer.x - localPlayer.x;
+            float dy = targetPlayer.y - localPlayer.y;
+            float dz = targetPlayer.z + 0.3f - localPlayer.z;
 
-            // Calcular a distância horizontal e a distância total
-            float distanceHorizontal = (float)Math.Sqrt(deltaX * deltaX + deltaY * deltaY);
-            float distanceTotal = (float)Math.Sqrt(deltaX * deltaX + deltaY * deltaY + deltaZ * deltaZ);
+            // Calcular a distância horizontal entre o jogador e o alvo
+            float distanceHorizontal = (float)Math.Sqrt(dx * dx + dy * dy);
 
-            // Calcular yaw (ângulo no plano XY)
-            float desiredYaw = -(float)Math.Atan2(deltaY, deltaX) * (180.0f / (float)Math.PI);
+            // Calcular o yaw (horizontal)
+            float yaw = (float)Math.Atan2(dy, dx); // Em radianos
+            float yawDegrees =  yaw * 180.0f / (float) Math.PI; // Converter para graus e normalizar
 
-            // Calcular pitch (ângulo vertical)
-            float desiredPitch = (float)Math.Atan2(deltaZ, distanceHorizontal) * (180.0f / (float)Math.PI);
+            // Calcular o pitch (vertical)
+            float pitch = (float)Math.Atan2(dz, distanceHorizontal); // Em radianos
+            float pitchDegrees = pitch * 180.0f / (float)Math.PI; // Converter para graus
 
-            // Ajustar yaw e pitch de acordo com os valores atuais
-            float yawDifference = desiredYaw - localPlayer.viewX;
-            float pitchDifference = desiredPitch - localPlayer.viewY;
+            // Limitar o pitch entre -90 e 90 graus
+            pitchDegrees = Math.Max(-90.0f, Math.Min(90.0f, pitchDegrees));
 
-            // Inicializar os alvos com os valores atuais
-            targetYaw = desiredYaw;
-            targetPitch = desiredPitch;
+            // Atribuir os valores calculados para os parâmetros de saída
+            targetYaw = yawDegrees;
+            targetPitch = pitchDegrees;
+
+            // Verificar se a visão precisa ser alterada (sempre ajusta a visão neste ponto)
             changeVision = true;
 
-            Console.WriteLine("Viewing" + targetPlayer.name + " at " + targetYaw + " " + targetPitch);
-
+            // Depuração - Mostrar resultados
+            Console.WriteLine($"Targeting {targetPlayer.name} at Pitch: {targetPitch:F6}, Yaw: {targetYaw:F6}, ChangeVision: {changeVision}");
         }
+
+
     }
 }
