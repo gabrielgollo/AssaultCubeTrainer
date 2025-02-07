@@ -76,9 +76,31 @@ namespace AssaultCubeTrainer
             string lifeValue = LifeInput.Value.ToString();
             trainer.TrySetLife(lifeValue);
             debugTextBox.Text+= "Life set to: " + lifeValue+"\n";
-            
-            
         }
+
+        private void setGrenadeBut_Click(object sender, EventArgs e)
+        {
+            if (!trainer.isAttached)
+            {
+                MessageBox.Show("Game is not attached");
+                return;
+            }
+            string value = GrenadesInput.Value.ToString();
+            trainer.TrySetGrenadesValue(value);
+            debugTextBox.Text += "Grenades set to: " + value + "\n";
+        }
+        private void setAmmoButton_Click(object sender, EventArgs e)
+        {
+            if (!trainer.isAttached)
+            {
+                MessageBox.Show("Game is not attached");
+                return;
+            }
+            string value = ammoInput.Value.ToString();
+            trainer.TrySetAmmo1Value(value);
+            debugTextBox.Text += "Ammo set to: " + value + "\n";
+        }
+
         private void setAttbutton_Click(object sender, EventArgs e)
         {
             if (trainer.isAttached)
@@ -101,5 +123,7 @@ namespace AssaultCubeTrainer
         {
             trainer.AimbotEnabled = enableAimbotBox.Checked;
         }
+
+        
     }
 }

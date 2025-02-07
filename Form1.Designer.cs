@@ -44,7 +44,7 @@
             this.gameProcessIdTextBox = new System.Windows.Forms.TextBox();
             this.gameProcessIdLabel = new System.Windows.Forms.Label();
             this.ammoInput = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
+            this.setAmmoButton = new System.Windows.Forms.Button();
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.ammo1Label = new System.Windows.Forms.Label();
             this.ammo1ValueLabel = new System.Windows.Forms.Label();
@@ -188,6 +188,7 @@
             this.setGrenadeBut.TabIndex = 2;
             this.setGrenadeBut.Text = "Set Grenades";
             this.setGrenadeBut.UseVisualStyleBackColor = true;
+            this.setGrenadeBut.Click += new System.EventHandler(this.setGrenadeBut_Click);
             // 
             // gameProcessLabel
             // 
@@ -232,21 +233,22 @@
             0,
             0});
             // 
-            // button1
+            // setAmmoButton
             // 
-            this.button1.Location = new System.Drawing.Point(3, 42);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(79, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Set Ammo";
-            this.button1.UseVisualStyleBackColor = true;
+            this.setAmmoButton.Location = new System.Drawing.Point(3, 42);
+            this.setAmmoButton.Name = "setAmmoButton";
+            this.setAmmoButton.Size = new System.Drawing.Size(79, 23);
+            this.setAmmoButton.TabIndex = 2;
+            this.setAmmoButton.Text = "Set Ammo";
+            this.setAmmoButton.UseVisualStyleBackColor = true;
+            this.setAmmoButton.Click += new System.EventHandler(this.setAmmoButton_Click);
             // 
             // flowLayoutPanel3
             // 
             this.flowLayoutPanel3.Controls.Add(this.ammo1Label);
             this.flowLayoutPanel3.Controls.Add(this.ammo1ValueLabel);
             this.flowLayoutPanel3.Controls.Add(this.ammoInput);
-            this.flowLayoutPanel3.Controls.Add(this.button1);
+            this.flowLayoutPanel3.Controls.Add(this.setAmmoButton);
             this.flowLayoutPanel3.Location = new System.Drawing.Point(12, 144);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
             this.flowLayoutPanel3.Size = new System.Drawing.Size(147, 100);
@@ -361,7 +363,7 @@
         private System.Windows.Forms.NumericUpDown GrenadesInput;
         private System.Windows.Forms.Button setGrenadeBut;
         private System.Windows.Forms.NumericUpDown ammoInput;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button setAmmoButton;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.Label ammo1Label;
         private System.Windows.Forms.Label ammo1ValueLabel;

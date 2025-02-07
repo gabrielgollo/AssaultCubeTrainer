@@ -12,25 +12,30 @@ namespace AssaultCubeTrainer
 {
     class ESP
     {
-        public static void ShowESP(ViewMatrix viewMatrix, List<Entity> playerList, Size gameProcessWinSize, Process gameProcess) {
+        public static void ShowESP(ViewMatrix viewMatrix, List<Entity> enemies, Entity player, Size gameProcessWinSize, Process gameProcess) {
 
-            foreach (Entity player in playerList)
+            foreach (Entity enemy in enemies)
                 {    
                     // Converter coordenadas de mundo para coordenadas de tela
-                    PointF screenPos = ESP.WorldToScreen(viewMatrix, player, gameProcessWinSize);
+                    PointF screenPos = ESP.WorldToScreen(viewMatrix, enemy, gameProcessWinSize);
 
                     // Verificar se a posição está dentro da tela
-                    if (screenPos.X >= 0 && screenPos.X <= gameProcessWinSize.Width && screenPos.Y >= 0 && screenPos.Y <= gameProcessWinSize.Height && player.hp > 0)
+                    if (screenPos.X >= 0 && screenPos.X <= gameProcessWinSize.Width && screenPos.Y >= 0 && screenPos.Y <= gameProcessWinSize.Height && enemy.hp > 0)
                     {
                         try
                         {
-                            // Desenhar quadrado ao redor do personagem
-                            Rectangle rect = new Rectangle((int)screenPos.X, (int)screenPos.Y, 20, 20); // Tamanho do quadrado 20x20
-                            if (player.hp > 70)
+
+                        float distance_x_y = (float)Math.Sqrt(Math.Pow(player.x - enemy.x, 2) + Math.Pow(player.y - enemy.y, 2) + Math.Pow(player.z - enemy.z, 2));
+                        float squareHeight = (float)Math.Tan(1.43029737) * distance_x_y;
+
+                        //// Desenhar quadrado ao redor do personagem
+                        Rectangle rect = new Rectangle((int)screenPos.X - 23, (int)screenPos.Y - 20, 40, (int)squareHeight);
+
+                        if (enemy.hp > 70)
                             {
                                 Drawing.DrawRect(gameProcess.MainWindowHandle, Color.Green, rect);
                             }
-                            else if (player.hp > 30)
+                            else if (enemy.hp > 30)
                             {
                                 Drawing.DrawRect(gameProcess.MainWindowHandle, Color.Orange, rect);
                             }

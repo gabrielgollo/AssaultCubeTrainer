@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using AssaultCubeTrainer;
 using System.Windows.Forms;
 using System.Drawing;
+using System.Numerics;
+using System.Globalization;
 namespace AssaultCubeTrainer
 {
     class TrainerMain
@@ -38,22 +40,34 @@ namespace AssaultCubeTrainer
                         if (isAttached)
                         {
                             Entity localPlayer = getLocalPlayer();
+                            List<Entity> allPlayers = loadEntities();
+
+                            // should filter team
+                            List<Entity> enemies = allPlayers.Where(p => (p.team >= 0 && p.team <=100 && p.hp > 0 && p.hp <= 100 && p.team != localPlayer.team)).ToList();
+
                             Size gameProcessWinSize = Drawing.GetSize(gameProcessName);
 
                             if (localPlayer != null) {
                                 UpdateStates(localPlayer, gameProcessWinSize);
                             }
 
-                            StartEsp(gameProcessWinSize, localPlayer, gameProcessName);
-                            StartAimbot(gameProcessWinSize, localPlayer);
+                            StartEsp(gameProcessWinSize, localPlayer, enemies);
+                            StartAimbot(gameProcessWinSize, localPlayer, enemies);
                         }
                     }
-                    catch (Exception)
+                    catch (Exception e)
                     {
-
-                        throw;
+                        if (e.Message == "Missed the win handler")
+                        {
+                            isAttached = false;
+                            attachGame(gameProcessName);
+                        }
+                        else
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
-                    Thread.Sleep(300);
+                    //Thread.Sleep(10);
                 }
             });
 
@@ -62,83 +76,74 @@ namespace AssaultCubeTrainer
 
             return;
         }
-        public void StartAimbot(Size gameProcessWinSize, Entity localPlayer)
+        public void StartAimbot(Size gameProcessWinSize, Entity player, List<Entity> enemies)
         {
             if (AimbotEnabled)
             {
                 try
                 {
-                    // Carrega todos os jogadores
-                    List<Entity> allPlayers = loadEntities();
-                    // Filtra apenas os inimigos (excluindo a equipe do jogador local)
-                    List<Entity> enemies = allPlayers.Where(p => p.team != localPlayer.team).ToList();
 
                     // Verifica se há inimigos
                     if (enemies.Count > 0)
                     {
                         // Variáveis para armazenar o inimigo mais próximo
-                        // Entity closestEnemy = null;
-                        float closestDistance = float.MaxValue;
-                        float closestYaw = 0.0f;
-                        float closestPitch = 0.0f;
+                        
+
+                        // Obtém os endereços de memória para os ângulos de visão do jogador local
+                        string PlayerEntityMemoryHex = m.ReadInt(Offsets.offsetLocalPlayer).ToString("X");
+                       
+                        string viewXAddress = Utils.SumOfHexStrings(PlayerEntityMemoryHex, Offsets.m_ViewAngleX);
+                        string viewYAddress = Utils.SumOfHexStrings(PlayerEntityMemoryHex, Offsets.m_ViewAngleY);
+                        // Lê os valores atuais de pitch e yaw do jogador local
+                        float currYaw = m.ReadFloat(viewXAddress); // de 0 a 360
+                        float currPitch = m.ReadFloat(viewYAddress); // de -90 a 90
+
+                        List<Vector2> ClosestPitchesAndYaws = new List<Vector2>();
 
                         // Itera sobre todos os inimigos
                         foreach (Entity enemy in enemies)
                         {
-                            ViewMatrix view = ESP.GetViewMatrix(m);
-                            // Obtém os endereços de memória para os ângulos de visão do jogador local
-                            string PlayerEntityMemoryHex = m.ReadInt(Offsets.offsetLocalPlayer).ToString("X");
-                            string viewXAddress = Utils.SumOfHexStrings(PlayerEntityMemoryHex, Offsets.m_ViewAngleX);
-                            string viewYAddress = Utils.SumOfHexStrings(PlayerEntityMemoryHex, Offsets.m_ViewAngleY);
-
-                            // Lê os valores atuais de pitch e yaw do jogador local
-                            string currPitch = m.ReadFloat(viewYAddress).ToString();
-                            string currYaw = m.ReadFloat(viewXAddress).ToString();
-
-                            // Calcula a distância horizontal do inimigo
-                            float abspos_x = enemy.x - localPlayer.x;
-                            float abspos_y = enemy.y - localPlayer.y;
-                            float abspos_z = enemy.z + 0.3f - localPlayer.z; // Adiciona 0.3 para mirar na cabeça
-                            float Horizontal_distance = (float)Math.Sqrt(abspos_x * abspos_x + abspos_y* abspos_y);
-
-                            // Calcula a distância 2D (usada para verificar se o inimigo está dentro da mira)
-                            float screenX = (view.m11 * enemy.x) + (view.m21 * enemy.y) + (view.m31 * enemy.z) + view.m41;
-                            float screenY = (view.m12 * enemy.x) + (view.m22 * enemy.y) + (view.m32 * enemy.z) + view.m42;
-                            float screenW = (view.m14 * enemy.x) + (view.m24 * enemy.y) + (view.m34 * enemy.z) + view.m44;
-                            if (screenW <= 0.001f)
-                            {
-                                continue; // Se a distância for muito pequena, ignore esse inimigo
-                            }
-
-                            // Converte a posição do inimigo para o espaço da tela
-                            float camX = gameProcessWinSize.Width / 2.0f;
-                            float camY = gameProcessWinSize.Height / 2.0f;
-                            float deltax = (camX * screenX / screenW);
-                            float deltay = (camY * screenY / screenW);
-                            float distanceToCrosshair = (float)Math.Sqrt(deltax * deltax + deltay * deltay);
-
-                            // Se o inimigo está mais próximo do centro da tela (mira), calcula o yaw e pitch
-                            if (distanceToCrosshair < closestDistance)
-                            {
-                                closestDistance = distanceToCrosshair;
-
-                                // Calcula o yaw (azimutho no plano XY)
-                                float azimuth_xy = (float)Math.Atan2(abspos_y, abspos_x);
-                                closestYaw = azimuth_xy * (180.0f / (float) Math.PI) + 90; // Ajuste de 90 graus
-
-                                // Calcula o pitch (azimutho vertical)
-                                float azimuth_z = (float) Math.Atan2(abspos_z, Horizontal_distance);
-                                closestPitch = azimuth_z * (180.0f / (float) Math.PI);
-                            }
+                            if (enemy.hp < 0) continue;
                             
-                            // Se um inimigo foi encontrado, ajusta a mira
-                            if (closestDistance != float.MaxValue)
+                            ViewMatrix viewMatrix = ESP.GetViewMatrix(m);
+
+                            PointF screenPos = ESP.WorldToScreen(viewMatrix, enemy, gameProcessWinSize);
+
+                            // Verificar se a posição está dentro da tela
+                            if (screenPos.X >= 0 && screenPos.X <= gameProcessWinSize.Width && screenPos.Y >= 0 && screenPos.Y <= gameProcessWinSize.Height && player.hp > 0)
                             {
-                                Console.WriteLine($"Ajustando mira para {closestYaw} (Yaw), {closestPitch} (Pitch)");
-                                // Atualiza os ângulos de visão do jogador local
-                                m.WriteMemory(viewXAddress, "float", closestYaw.ToString());
-                                m.WriteMemory(viewYAddress, "float", closestPitch.ToString());
+                                
+
+                                //Console.WriteLine($"Current Pitch {currPitch}, Yaw: {currYaw}");
+                                // Calcula a distância 2D (usada para verificar se o inimigo está dentro da mira)
+                                Aimbot.CalculateAim(player, enemy, out float targetPitch, out float targetYaw);
+                                // Depuração - Mostrar resultados
+                                //Console.WriteLine($"Targeting {enemy.name} at Pitch: {targetPitch:F6}, Yaw: {targetYaw:F6}");
+                                ClosestPitchesAndYaws.Add(new Vector2{ x=targetYaw, y=targetPitch,  } );
                             }
+                        }
+
+                        if (ClosestPitchesAndYaws.Count > 0)
+                        {
+                            Vector2 closestTarget = ClosestPitchesAndYaws[0];
+                            float smallestDistance = float.MaxValue;
+
+                            foreach (var aim in ClosestPitchesAndYaws)
+                            {
+                                float yawDiff = Math.Abs(currYaw - aim.x);
+                                float pitchDiff = Math.Abs(currPitch - aim.y);
+                                float totalDiff = yawDiff + pitchDiff;
+
+                                if (totalDiff < smallestDistance)
+                                {
+                                    smallestDistance = totalDiff;
+                                    closestTarget = aim;
+                                }
+                            }
+
+                            // Atualiza os ângulos de visão do jogador local para o inimigo mais próximo
+                            m.WriteMemory(viewXAddress, "float", closestTarget.x.ToString(CultureInfo.InvariantCulture));
+                            m.WriteMemory(viewYAddress, "float", closestTarget.y.ToString(CultureInfo.InvariantCulture));
                         }
 
                     }
@@ -154,31 +159,14 @@ namespace AssaultCubeTrainer
                 }
             }
         }
-        public void StartEsp(Size gameProcessWinSize, Entity localPlayer, string gameProcessName)
+        public void StartEsp(Size gameProcessWinSize, Entity localPlayer, List<Entity> enemies)
         {
             if (EspEnabled)
             {
-                try
-                {
-                    List<Entity> allPlayers = loadEntities();
-                    // should filter team
-                    List<Entity> enemies = allPlayers.Where(p => p.team != localPlayer.team).ToList();
+                    //Console.WriteLine($"x: {localPlayer.x} y: {localPlayer.y} z: {localPlayer.z}");
+                    
                     ViewMatrix viewMatrix = ESP.GetViewMatrix(m);
-                    ESP.ShowESP(viewMatrix, enemies, gameProcessWinSize, gameProcess);
-                }
-                catch (Exception e)
-                {
-                    if (e.Message == "Missed the win handler")
-                    {
-                        isAttached = false;
-                        attachGame(gameProcessName);
-                    }
-                    else
-                    {
-                        Console.WriteLine(e.Message);
-                    }
-                }
-
+                    ESP.ShowESP(viewMatrix, enemies, localPlayer, gameProcessWinSize, gameProcess);
             }
         }
 
