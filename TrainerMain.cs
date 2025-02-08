@@ -18,6 +18,10 @@ namespace AssaultCubeTrainer
         public Boolean isAttached = false;
         public Boolean EspEnabled = false;
         public Boolean AimbotEnabled = false;
+        public Boolean KeepAttributes = false;
+        public int lifeValue = 100;
+        public int ammo1Value = 100;
+        public int grenadesValue = 100;
         public Mem m = new Mem();
         public Process gameProcess;
         public string gameProcessId;
@@ -51,6 +55,7 @@ namespace AssaultCubeTrainer
                                 UpdateStates(localPlayer, gameProcessWinSize);
                             }
 
+                            StartKeepAttributes();
                             StartEsp(gameProcessWinSize, localPlayer, enemies);
                             StartAimbot(gameProcessWinSize, localPlayer, enemies);
                         }
@@ -167,6 +172,14 @@ namespace AssaultCubeTrainer
                     
                     ViewMatrix viewMatrix = ESP.GetViewMatrix(m);
                     ESP.ShowESP(viewMatrix, enemies, localPlayer, gameProcessWinSize, gameProcess);
+            }
+        }
+
+        public void StartKeepAttributes()
+        {
+            if (KeepAttributes && isAttached)
+            {
+                TrySetAttributes(lifeValue.ToString(), ammo1Value.ToString(), grenadesValue.ToString());
             }
         }
 

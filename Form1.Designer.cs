@@ -48,10 +48,10 @@
             this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
             this.ammo1Label = new System.Windows.Forms.Label();
             this.ammo1ValueLabel = new System.Windows.Forms.Label();
-            this.setAttbutton = new System.Windows.Forms.Button();
             this.sizeValueLabel = new System.Windows.Forms.Label();
             this.enableESPBox = new System.Windows.Forms.CheckBox();
             this.enableAimbotBox = new System.Windows.Forms.CheckBox();
+            this.keepAttributesBox = new System.Windows.Forms.CheckBox();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LifeInput)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
@@ -96,7 +96,7 @@
             this.flowLayoutPanel1.Controls.Add(this.setLifeBut);
             this.flowLayoutPanel1.Location = new System.Drawing.Point(12, 25);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(147, 100);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(147, 70);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // lifeLabel
@@ -133,6 +133,7 @@
             0,
             0,
             0});
+            this.LifeInput.ValueChanged += new System.EventHandler(this.LifeInput_ValueChanged);
             // 
             // setLifeBut
             // 
@@ -149,9 +150,9 @@
             this.flowLayoutPanel2.Controls.Add(this.grenadesLabel);
             this.flowLayoutPanel2.Controls.Add(this.GrenadesInput);
             this.flowLayoutPanel2.Controls.Add(this.setGrenadeBut);
-            this.flowLayoutPanel2.Location = new System.Drawing.Point(192, 25);
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(12, 179);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(145, 100);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(145, 70);
             this.flowLayoutPanel2.TabIndex = 4;
             // 
             // grenadesLabel
@@ -179,6 +180,7 @@
             0,
             0,
             0});
+            this.GrenadesInput.ValueChanged += new System.EventHandler(this.GrenadesInput_ValueChanged);
             // 
             // setGrenadeBut
             // 
@@ -232,6 +234,7 @@
             0,
             0,
             0});
+            this.ammoInput.ValueChanged += new System.EventHandler(this.ammoInput_ValueChanged);
             // 
             // setAmmoButton
             // 
@@ -249,9 +252,9 @@
             this.flowLayoutPanel3.Controls.Add(this.ammo1ValueLabel);
             this.flowLayoutPanel3.Controls.Add(this.ammoInput);
             this.flowLayoutPanel3.Controls.Add(this.setAmmoButton);
-            this.flowLayoutPanel3.Location = new System.Drawing.Point(12, 144);
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(12, 101);
             this.flowLayoutPanel3.Name = "flowLayoutPanel3";
-            this.flowLayoutPanel3.Size = new System.Drawing.Size(147, 100);
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(147, 72);
             this.flowLayoutPanel3.TabIndex = 7;
             // 
             // ammo1Label
@@ -272,16 +275,6 @@
             this.ammo1ValueLabel.TabIndex = 3;
             this.ammo1ValueLabel.Text = "-";
             // 
-            // setAttbutton
-            // 
-            this.setAttbutton.Location = new System.Drawing.Point(363, 221);
-            this.setAttbutton.Name = "setAttbutton";
-            this.setAttbutton.Size = new System.Drawing.Size(79, 23);
-            this.setAttbutton.TabIndex = 3;
-            this.setAttbutton.Text = "Set Attributes";
-            this.setAttbutton.UseVisualStyleBackColor = true;
-            this.setAttbutton.Click += new System.EventHandler(this.setAttbutton_Click);
-            // 
             // sizeValueLabel
             // 
             this.sizeValueLabel.AutoSize = true;
@@ -293,7 +286,7 @@
             // enableESPBox
             // 
             this.enableESPBox.AutoSize = true;
-            this.enableESPBox.Location = new System.Drawing.Point(192, 144);
+            this.enableESPBox.Location = new System.Drawing.Point(192, 25);
             this.enableESPBox.Name = "enableESPBox";
             this.enableESPBox.Size = new System.Drawing.Size(83, 17);
             this.enableESPBox.TabIndex = 10;
@@ -304,7 +297,7 @@
             // enableAimbotBox
             // 
             this.enableAimbotBox.AutoSize = true;
-            this.enableAimbotBox.Location = new System.Drawing.Point(192, 186);
+            this.enableAimbotBox.Location = new System.Drawing.Point(192, 48);
             this.enableAimbotBox.Name = "enableAimbotBox";
             this.enableAimbotBox.Size = new System.Drawing.Size(94, 17);
             this.enableAimbotBox.TabIndex = 11;
@@ -312,18 +305,29 @@
             this.enableAimbotBox.UseVisualStyleBackColor = true;
             this.enableAimbotBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // keepAttributesBox
+            // 
+            this.keepAttributesBox.AutoSize = true;
+            this.keepAttributesBox.Location = new System.Drawing.Point(192, 71);
+            this.keepAttributesBox.Name = "keepAttributesBox";
+            this.keepAttributesBox.Size = new System.Drawing.Size(86, 17);
+            this.keepAttributesBox.TabIndex = 12;
+            this.keepAttributesBox.Text = "Keep Values";
+            this.keepAttributesBox.UseVisualStyleBackColor = true;
+            this.keepAttributesBox.CheckedChanged += new System.EventHandler(this.keepAttributesBox_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(478, 446);
+            this.Controls.Add(this.keepAttributesBox);
             this.Controls.Add(this.enableAimbotBox);
             this.Controls.Add(this.enableESPBox);
             this.Controls.Add(this.sizeValueLabel);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.gameProcessIdLabel);
-            this.Controls.Add(this.setAttbutton);
             this.Controls.Add(this.gameProcessIdTextBox);
             this.Controls.Add(this.gameProcessLabel);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -367,11 +371,11 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
         private System.Windows.Forms.Label ammo1Label;
         private System.Windows.Forms.Label ammo1ValueLabel;
-        private System.Windows.Forms.Button setAttbutton;
         private System.Windows.Forms.Label lifeValueLabel;
         private System.Windows.Forms.Label sizeValueLabel;
         private System.Windows.Forms.CheckBox enableESPBox;
         private System.Windows.Forms.CheckBox enableAimbotBox;
+        private System.Windows.Forms.CheckBox keepAttributesBox;
     }
 }
 

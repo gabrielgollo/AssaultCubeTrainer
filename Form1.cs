@@ -12,14 +12,55 @@ namespace AssaultCubeTrainer
     public partial class Form1 : Form
     {
         TrainerMain trainer;
+        private GlobalKeyboardHook _globalKeyboardHook;
 
         public Form1()
         {
             InitializeComponent();
             trainer = new TrainerMain { UpdateStates = UpdateStates };
+
+            _globalKeyboardHook = new GlobalKeyboardHook();
+            _globalKeyboardHook.KeyboardPressed += OnKeyPressed;
+
         }
 
-        
+        private void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
+        {
+            Debug.WriteLine(e.KeyboardData.VirtualCode);
+
+            //if (e.KeyboardData.VirtualCode != GlobalKeyboardHook.VkSnapshot) return;
+
+            // seems, not needed in the life.
+            //if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.SysKeyDown &&
+            //    e.KeyboardData.Flags == GlobalKeyboardHook.LlkhfAltdown)
+            //{
+            //    MessageBox.Show("Alt + Print Screen");
+            //    e.Handled = true;
+            //}
+            //else
+
+            if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
+            {
+
+
+                switch (e.KeyboardData.VirtualCode)
+                {
+                    case 45: // F12
+                       AttachGameButton_Click(null, null);
+                        break;
+                    case 112: // F1
+                        enableESPBox.Checked = !enableESPBox.Checked;
+                        break;
+                    case 113: // F2
+                        enableAimbotBox.Checked = !enableAimbotBox.Checked;
+                        break;
+                    default:
+                        return;
+                }
+
+            e.Handled = true;
+            }
+        }
 
         private void UpdateLabelSafe(Label label, string text)
         {
@@ -101,18 +142,6 @@ namespace AssaultCubeTrainer
             debugTextBox.Text += "Ammo set to: " + value + "\n";
         }
 
-        private void setAttbutton_Click(object sender, EventArgs e)
-        {
-            if (trainer.isAttached)
-            {
-                string lifeValue = LifeInput.Value.ToString();
-                string ammoValue = ammoInput.Value.ToString();
-                string grenadesValue = GrenadesInput.Value.ToString();
-                trainer.TrySetAttributes(lifeValue, ammoValue, grenadesValue);
-                debugTextBox.Text += "Attributes set to: HP:" + lifeValue + " ammo1:" + ammoValue + " grenades:" + grenadesValue + "\n";
-                return ;
-            }
-        }
 
         private void espEnableBox_CheckedChanged(object sender, EventArgs e)
         {
@@ -124,6 +153,30 @@ namespace AssaultCubeTrainer
             trainer.AimbotEnabled = enableAimbotBox.Checked;
         }
 
-        
+        private void keepAttributesBox_CheckedChanged(object sender, EventArgs e)
+        {
+            if(trainer.isAttached)
+            {
+                trainer.lifeValue = (int)LifeInput.Value;
+                trainer.ammo1Value = (int)ammoInput.Value;
+                trainer.grenadesValue = (int)GrenadesInput.Value;
+                trainer.KeepAttributes = keepAttributesBox.Checked;
+            }
+        }
+
+        private void LifeInput_ValueChanged(object sender, EventArgs e)
+        {
+            trainer.lifeValue = (int)LifeInput.Value;
+        }
+
+        private void ammoInput_ValueChanged(object sender, EventArgs e)
+        {
+            trainer.ammo1Value = (int)ammoInput.Value;
+        }
+
+        private void GrenadesInput_ValueChanged(object sender, EventArgs e)
+        {
+            trainer.grenadesValue = (int)GrenadesInput.Value;
+        }
     }
 }
