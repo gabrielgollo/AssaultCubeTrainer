@@ -26,33 +26,25 @@ namespace AssaultCubeTrainer
 
         private void OnKeyPressed(object sender, GlobalKeyboardHookEventArgs e)
         {
-            Debug.WriteLine(e.KeyboardData.VirtualCode);
-
-            //if (e.KeyboardData.VirtualCode != GlobalKeyboardHook.VkSnapshot) return;
-
-            // seems, not needed in the life.
-            //if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.SysKeyDown &&
-            //    e.KeyboardData.Flags == GlobalKeyboardHook.LlkhfAltdown)
-            //{
-            //    MessageBox.Show("Alt + Print Screen");
-            //    e.Handled = true;
-            //}
-            //else
-
+            //Debug.WriteLine(e.KeyboardData.VirtualCode);
             if (e.KeyboardState == GlobalKeyboardHook.KeyboardState.KeyDown)
             {
 
 
                 switch (e.KeyboardData.VirtualCode)
                 {
-                    case 45: // F12
-                       AttachGameButton_Click(null, null);
+                    case 45: // INS
+                        if (trainer.isAttached) break;
+                        AttachGameButton_Click(null, null);
                         break;
                     case 112: // F1
                         enableESPBox.Checked = !enableESPBox.Checked;
                         break;
                     case 113: // F2
                         enableAimbotBox.Checked = !enableAimbotBox.Checked;
+                        break;
+                    case 114: // F3
+                        setAttributesBox.Checked = !setAttributesBox.Checked;
                         break;
                     default:
                         return;
@@ -160,7 +152,7 @@ namespace AssaultCubeTrainer
                 trainer.lifeValue = (int)LifeInput.Value;
                 trainer.ammo1Value = (int)ammoInput.Value;
                 trainer.grenadesValue = (int)GrenadesInput.Value;
-                trainer.KeepAttributes = keepAttributesBox.Checked;
+                trainer.KeepAttributes = setAttributesBox.Checked;
             }
         }
 

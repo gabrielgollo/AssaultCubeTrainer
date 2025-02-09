@@ -25,21 +25,8 @@ namespace AssaultCubeTrainer
 
             targetYaw = yawDegrees+90;
 
-            if (dy < 0)
-            {
-                dy*= -1;
-            }
-            if (dy < 5)
-            {
-                if (dx < 0)
-                {
-                    dx *= -1;
-                }
-                dy = dx;
-            }
-
             // Calcular o pitch (vertical)
-            float pitch = (float)Math.Atan2(dz, dy); // Em radianos
+            float pitch = (float)Math.Atan2(dz, distanceHorizontal); // Em radianos
             float pitchDegrees = (float) ( pitch * (180/Math.PI) ); // Converter para graus
 
             // Limitar o pitch entre -90 e 90 graus

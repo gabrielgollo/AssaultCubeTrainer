@@ -51,36 +51,49 @@
             this.sizeValueLabel = new System.Windows.Forms.Label();
             this.enableESPBox = new System.Windows.Forms.CheckBox();
             this.enableAimbotBox = new System.Windows.Forms.CheckBox();
-            this.keepAttributesBox = new System.Windows.Forms.CheckBox();
+            this.setAttributesBox = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LifeInput)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.GrenadesInput)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ammoInput)).BeginInit();
             this.flowLayoutPanel3.SuspendLayout();
+            this.flowLayoutPanel4.SuspendLayout();
+            this.flowLayoutPanel5.SuspendLayout();
+            this.flowLayoutPanel6.SuspendLayout();
+            this.flowLayoutPanel7.SuspendLayout();
             this.SuspendLayout();
             // 
             // debugTextBox
             // 
             this.debugTextBox.Enabled = false;
-            this.debugTextBox.Location = new System.Drawing.Point(12, 271);
+            this.debugTextBox.Location = new System.Drawing.Point(12, 273);
             this.debugTextBox.Name = "debugTextBox";
-            this.debugTextBox.Size = new System.Drawing.Size(451, 163);
+            this.debugTextBox.Size = new System.Drawing.Size(454, 79);
             this.debugTextBox.TabIndex = 0;
             this.debugTextBox.Text = "";
             // 
             // gameProcessTextBox
             // 
             this.gameProcessTextBox.Enabled = false;
-            this.gameProcessTextBox.Location = new System.Drawing.Point(363, 39);
+            this.gameProcessTextBox.Location = new System.Drawing.Point(3, 16);
             this.gameProcessTextBox.Name = "gameProcessTextBox";
-            this.gameProcessTextBox.Size = new System.Drawing.Size(100, 20);
+            this.gameProcessTextBox.Size = new System.Drawing.Size(73, 20);
             this.gameProcessTextBox.TabIndex = 1;
             this.gameProcessTextBox.Text = "ac_client";
             // 
             // readMemoryButton
             // 
-            this.readMemoryButton.Location = new System.Drawing.Point(363, 144);
+            this.readMemoryButton.Location = new System.Drawing.Point(3, 81);
             this.readMemoryButton.Name = "readMemoryButton";
             this.readMemoryButton.Size = new System.Drawing.Size(75, 23);
             this.readMemoryButton.TabIndex = 2;
@@ -129,7 +142,7 @@
             this.LifeInput.Size = new System.Drawing.Size(120, 20);
             this.LifeInput.TabIndex = 0;
             this.LifeInput.Value = new decimal(new int[] {
-            159,
+            999,
             0,
             0,
             0});
@@ -176,7 +189,7 @@
             this.GrenadesInput.Size = new System.Drawing.Size(120, 20);
             this.GrenadesInput.TabIndex = 1;
             this.GrenadesInput.Value = new decimal(new int[] {
-            10,
+            99,
             0,
             0,
             0});
@@ -195,7 +208,7 @@
             // gameProcessLabel
             // 
             this.gameProcessLabel.AutoSize = true;
-            this.gameProcessLabel.Location = new System.Drawing.Point(360, 23);
+            this.gameProcessLabel.Location = new System.Drawing.Point(3, 0);
             this.gameProcessLabel.Name = "gameProcessLabel";
             this.gameProcessLabel.Size = new System.Drawing.Size(76, 13);
             this.gameProcessLabel.TabIndex = 0;
@@ -204,15 +217,15 @@
             // gameProcessIdTextBox
             // 
             this.gameProcessIdTextBox.Enabled = false;
-            this.gameProcessIdTextBox.Location = new System.Drawing.Point(363, 98);
+            this.gameProcessIdTextBox.Location = new System.Drawing.Point(3, 55);
             this.gameProcessIdTextBox.Name = "gameProcessIdTextBox";
-            this.gameProcessIdTextBox.Size = new System.Drawing.Size(100, 20);
+            this.gameProcessIdTextBox.Size = new System.Drawing.Size(73, 20);
             this.gameProcessIdTextBox.TabIndex = 5;
             // 
             // gameProcessIdLabel
             // 
             this.gameProcessIdLabel.AutoSize = true;
-            this.gameProcessIdLabel.Location = new System.Drawing.Point(360, 82);
+            this.gameProcessIdLabel.Location = new System.Drawing.Point(3, 39);
             this.gameProcessIdLabel.Name = "gameProcessIdLabel";
             this.gameProcessIdLabel.Size = new System.Drawing.Size(59, 13);
             this.gameProcessIdLabel.TabIndex = 6;
@@ -286,9 +299,10 @@
             // enableESPBox
             // 
             this.enableESPBox.AutoSize = true;
-            this.enableESPBox.Location = new System.Drawing.Point(192, 25);
+            this.enableESPBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enableESPBox.Location = new System.Drawing.Point(3, 26);
             this.enableESPBox.Name = "enableESPBox";
-            this.enableESPBox.Size = new System.Drawing.Size(83, 17);
+            this.enableESPBox.Size = new System.Drawing.Size(93, 17);
             this.enableESPBox.TabIndex = 10;
             this.enableESPBox.Text = "Enable ESP";
             this.enableESPBox.UseVisualStyleBackColor = true;
@@ -297,42 +311,147 @@
             // enableAimbotBox
             // 
             this.enableAimbotBox.AutoSize = true;
-            this.enableAimbotBox.Location = new System.Drawing.Point(192, 48);
+            this.enableAimbotBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.enableAimbotBox.Location = new System.Drawing.Point(3, 49);
             this.enableAimbotBox.Name = "enableAimbotBox";
-            this.enableAimbotBox.Size = new System.Drawing.Size(94, 17);
+            this.enableAimbotBox.Size = new System.Drawing.Size(107, 17);
             this.enableAimbotBox.TabIndex = 11;
             this.enableAimbotBox.Text = "Enable Aimbot";
             this.enableAimbotBox.UseVisualStyleBackColor = true;
             this.enableAimbotBox.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // keepAttributesBox
+            // setAttributesBox
             // 
-            this.keepAttributesBox.AutoSize = true;
-            this.keepAttributesBox.Location = new System.Drawing.Point(192, 71);
-            this.keepAttributesBox.Name = "keepAttributesBox";
-            this.keepAttributesBox.Size = new System.Drawing.Size(86, 17);
-            this.keepAttributesBox.TabIndex = 12;
-            this.keepAttributesBox.Text = "Keep Values";
-            this.keepAttributesBox.UseVisualStyleBackColor = true;
-            this.keepAttributesBox.CheckedChanged += new System.EventHandler(this.keepAttributesBox_CheckedChanged);
+            this.setAttributesBox.AutoSize = true;
+            this.setAttributesBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.setAttributesBox.Location = new System.Drawing.Point(3, 72);
+            this.setAttributesBox.Name = "setAttributesBox";
+            this.setAttributesBox.Size = new System.Drawing.Size(87, 17);
+            this.setAttributesBox.TabIndex = 12;
+            this.setAttributesBox.Text = "Set Values";
+            this.setAttributesBox.UseVisualStyleBackColor = true;
+            this.setAttributesBox.CheckedChanged += new System.EventHandler(this.keepAttributesBox_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(35, 26);
+            this.label1.Margin = new System.Windows.Forms.Padding(3);
+            this.label1.Name = "label1";
+            this.label1.Padding = new System.Windows.Forms.Padding(2);
+            this.label1.Size = new System.Drawing.Size(25, 17);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "F1";
+            // 
+            // label2
+            // 
+            this.label2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(35, 49);
+            this.label2.Margin = new System.Windows.Forms.Padding(3);
+            this.label2.Name = "label2";
+            this.label2.Padding = new System.Windows.Forms.Padding(2);
+            this.label2.Size = new System.Drawing.Size(25, 17);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "F2";
+            // 
+            // label3
+            // 
+            this.label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(35, 72);
+            this.label3.Margin = new System.Windows.Forms.Padding(3);
+            this.label3.Name = "label3";
+            this.label3.Padding = new System.Windows.Forms.Padding(2);
+            this.label3.Size = new System.Drawing.Size(25, 17);
+            this.label3.TabIndex = 15;
+            this.label3.Text = "F3";
+            // 
+            // flowLayoutPanel4
+            // 
+            this.flowLayoutPanel4.Controls.Add(this.flowLayoutPanel5);
+            this.flowLayoutPanel4.Controls.Add(this.flowLayoutPanel6);
+            this.flowLayoutPanel4.Location = new System.Drawing.Point(165, 25);
+            this.flowLayoutPanel4.Name = "flowLayoutPanel4";
+            this.flowLayoutPanel4.Size = new System.Drawing.Size(198, 190);
+            this.flowLayoutPanel4.TabIndex = 16;
+            // 
+            // flowLayoutPanel5
+            // 
+            this.flowLayoutPanel5.Controls.Add(this.label4);
+            this.flowLayoutPanel5.Controls.Add(this.enableESPBox);
+            this.flowLayoutPanel5.Controls.Add(this.enableAimbotBox);
+            this.flowLayoutPanel5.Controls.Add(this.setAttributesBox);
+            this.flowLayoutPanel5.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel5.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel5.Name = "flowLayoutPanel5";
+            this.flowLayoutPanel5.Size = new System.Drawing.Size(119, 187);
+            this.flowLayoutPanel5.TabIndex = 0;
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Controls.Add(this.label5);
+            this.flowLayoutPanel6.Controls.Add(this.label1);
+            this.flowLayoutPanel6.Controls.Add(this.label2);
+            this.flowLayoutPanel6.Controls.Add(this.label3);
+            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(128, 3);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(67, 187);
+            this.flowLayoutPanel6.TabIndex = 1;
+            // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.Controls.Add(this.gameProcessLabel);
+            this.flowLayoutPanel7.Controls.Add(this.gameProcessTextBox);
+            this.flowLayoutPanel7.Controls.Add(this.gameProcessIdLabel);
+            this.flowLayoutPanel7.Controls.Add(this.gameProcessIdTextBox);
+            this.flowLayoutPanel7.Controls.Add(this.readMemoryButton);
+            this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(366, 25);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(101, 116);
+            this.flowLayoutPanel7.TabIndex = 17;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(3, 3);
+            this.label4.Margin = new System.Windows.Forms.Padding(3);
+            this.label4.Name = "label4";
+            this.label4.Padding = new System.Windows.Forms.Padding(2);
+            this.label4.Size = new System.Drawing.Size(50, 17);
+            this.label4.TabIndex = 13;
+            this.label4.Text = "Cheats";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(3, 3);
+            this.label5.Margin = new System.Windows.Forms.Padding(3);
+            this.label5.Name = "label5";
+            this.label5.Padding = new System.Windows.Forms.Padding(2);
+            this.label5.Size = new System.Drawing.Size(57, 17);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Hotkeys";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(478, 446);
-            this.Controls.Add(this.keepAttributesBox);
-            this.Controls.Add(this.enableAimbotBox);
-            this.Controls.Add(this.enableESPBox);
+            this.ClientSize = new System.Drawing.Size(478, 364);
+            this.Controls.Add(this.flowLayoutPanel7);
+            this.Controls.Add(this.flowLayoutPanel4);
             this.Controls.Add(this.sizeValueLabel);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel2);
-            this.Controls.Add(this.gameProcessIdLabel);
-            this.Controls.Add(this.gameProcessIdTextBox);
-            this.Controls.Add(this.gameProcessLabel);
             this.Controls.Add(this.flowLayoutPanel1);
-            this.Controls.Add(this.readMemoryButton);
-            this.Controls.Add(this.gameProcessTextBox);
             this.Controls.Add(this.debugTextBox);
             this.Name = "Form1";
             this.Text = "Assault_Cube_Trainer";
@@ -345,6 +464,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.ammoInput)).EndInit();
             this.flowLayoutPanel3.ResumeLayout(false);
             this.flowLayoutPanel3.PerformLayout();
+            this.flowLayoutPanel4.ResumeLayout(false);
+            this.flowLayoutPanel5.ResumeLayout(false);
+            this.flowLayoutPanel5.PerformLayout();
+            this.flowLayoutPanel6.ResumeLayout(false);
+            this.flowLayoutPanel6.PerformLayout();
+            this.flowLayoutPanel7.ResumeLayout(false);
+            this.flowLayoutPanel7.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,7 +501,16 @@
         private System.Windows.Forms.Label sizeValueLabel;
         private System.Windows.Forms.CheckBox enableESPBox;
         private System.Windows.Forms.CheckBox enableAimbotBox;
-        private System.Windows.Forms.CheckBox keepAttributesBox;
+        private System.Windows.Forms.CheckBox setAttributesBox;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel4;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel5;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel6;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel7;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 
