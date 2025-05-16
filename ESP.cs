@@ -16,50 +16,39 @@ namespace AssaultCubeTrainer
 
             foreach (Entity enemy in enemies)
                 {    
-                // Converter coordenadas de mundo para coordenadas de tela
                 PointF screenPos = ESP.WorldToScreen(viewMatrix, enemy, gameProcessWinSize);
 
-                
-                // Verificar se a posição está dentro da tela
                 if (screenPos.X >= 0 && screenPos.X <= gameProcessWinSize.Width &&
                     screenPos.Y >= 0 && screenPos.Y <= gameProcessWinSize.Height &&
                     enemy.hp > 0)
                 {
                     try
                         {
-                        // Distância do jogador ao inimigo
                         float distance = (float)Math.Sqrt(
                             Math.Pow(player.x - enemy.x, 2) +
                             Math.Pow(player.y - enemy.y, 2) +
                             Math.Pow(player.z - enemy.z, 2)
                         );
-
-                        // Altura aproximada de um jogador no Assault Cube
                         float playerHeight = 8f;
 
-                        // Calcula o tamanho em pixels com base na projeção da matriz de visão
                         float screenHeight = gameProcessWinSize.Height;
                         float fov = player.fov;
                         float scale = (screenHeight / (2.0f * (float)Math.Tan(fov * Math.PI / 360.0))) / distance;
 
-                        // Tamanho do quadrado baseado na altura do jogador
                         float squareHeight = playerHeight * scale;
-                        float squareWidth = squareHeight / 2; // Ajuste para a largura proporcional
+                        float squareWidth = squareHeight / 2;
 
-                        // Criar o retângulo para desenhar ao redor do inimigo
                         Rectangle rect = new Rectangle(
                             (int)(screenPos.X - squareWidth / 2),
-                            (int)(screenPos.Y - playerHeight*2.2), // Ajuste para ficar centralizado
+                            (int)(screenPos.Y - playerHeight*2.2),
                             (int)squareWidth,
                             (int)squareHeight
                         );
 
-                        // Escolher a cor do quadrado baseado na vida do inimigo
                         Color espColor = enemy.hp > 70 ? Color.Green :
                                         enemy.hp > 30 ? Color.Orange :
                                         Color.Red;
 
-                        // Desenhar o quadrado
                         Drawing.DrawRect(gameProcess.MainWindowHandle, espColor, rect);
 
                     }

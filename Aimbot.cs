@@ -11,21 +11,17 @@ namespace AssaultCubeTrainer
     {
         public static void CalculateAim(Entity player, Entity enemy, out float targetPitch, out float targetYaw)
         {
-            // Calcular as diferenças entre as posições do alvo e do jogador local
             float dx = enemy.x - player.x;
             float dy = enemy.y - player.y;
             float dz = enemy.z - player.z;
 
-            // Calcular a distância horizontal entre o jogador e o alvo
             float distanceHorizontal = (float)Math.Sqrt(dx * dx + dy * dy);
 
-            // Calcular o yaw (horizontal)
             float yaw = (float)Math.Atan2(dy, dx); // Em radianos
             float yawDegrees = (float) (yaw * (180.0 / Math.PI)); // Converter para graus e normalizar
 
             targetYaw = yawDegrees+90;
 
-            // Calcular o pitch (vertical)
             float pitch = (float)Math.Atan2(dz, distanceHorizontal); // Em radianos
             float pitchDegrees = (float) ( pitch * (180/Math.PI) ); // Converter para graus
 

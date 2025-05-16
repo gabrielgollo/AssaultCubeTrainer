@@ -57,10 +57,10 @@
             this.label3 = new System.Windows.Forms.Label();
             this.flowLayoutPanel4 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel5 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
-            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
             this.label4 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel6 = new System.Windows.Forms.FlowLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
+            this.flowLayoutPanel7 = new System.Windows.Forms.FlowLayoutPanel();
             this.flowLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.LifeInput)).BeginInit();
             this.flowLayoutPanel2.SuspendLayout();
@@ -93,7 +93,7 @@
             // 
             // readMemoryButton
             // 
-            this.readMemoryButton.Location = new System.Drawing.Point(3, 81);
+            this.readMemoryButton.Location = new System.Drawing.Point(3, 94);
             this.readMemoryButton.Name = "readMemoryButton";
             this.readMemoryButton.Size = new System.Drawing.Size(75, 23);
             this.readMemoryButton.TabIndex = 2;
@@ -291,10 +291,11 @@
             // sizeValueLabel
             // 
             this.sizeValueLabel.AutoSize = true;
-            this.sizeValueLabel.Location = new System.Drawing.Point(360, 121);
+            this.sizeValueLabel.Location = new System.Drawing.Point(3, 78);
             this.sizeValueLabel.Name = "sizeValueLabel";
-            this.sizeValueLabel.Size = new System.Drawing.Size(0, 13);
+            this.sizeValueLabel.Size = new System.Drawing.Size(24, 13);
             this.sizeValueLabel.TabIndex = 9;
+            this.sizeValueLabel.Text = "0x0";
             // 
             // enableESPBox
             // 
@@ -392,31 +393,6 @@
             this.flowLayoutPanel5.Size = new System.Drawing.Size(119, 187);
             this.flowLayoutPanel5.TabIndex = 0;
             // 
-            // flowLayoutPanel6
-            // 
-            this.flowLayoutPanel6.Controls.Add(this.label5);
-            this.flowLayoutPanel6.Controls.Add(this.label1);
-            this.flowLayoutPanel6.Controls.Add(this.label2);
-            this.flowLayoutPanel6.Controls.Add(this.label3);
-            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel6.Location = new System.Drawing.Point(128, 3);
-            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
-            this.flowLayoutPanel6.Size = new System.Drawing.Size(67, 187);
-            this.flowLayoutPanel6.TabIndex = 1;
-            // 
-            // flowLayoutPanel7
-            // 
-            this.flowLayoutPanel7.Controls.Add(this.gameProcessLabel);
-            this.flowLayoutPanel7.Controls.Add(this.gameProcessTextBox);
-            this.flowLayoutPanel7.Controls.Add(this.gameProcessIdLabel);
-            this.flowLayoutPanel7.Controls.Add(this.gameProcessIdTextBox);
-            this.flowLayoutPanel7.Controls.Add(this.readMemoryButton);
-            this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel7.Location = new System.Drawing.Point(366, 25);
-            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
-            this.flowLayoutPanel7.Size = new System.Drawing.Size(101, 116);
-            this.flowLayoutPanel7.TabIndex = 17;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -428,6 +404,18 @@
             this.label4.Size = new System.Drawing.Size(50, 17);
             this.label4.TabIndex = 13;
             this.label4.Text = "Cheats";
+            // 
+            // flowLayoutPanel6
+            // 
+            this.flowLayoutPanel6.Controls.Add(this.label5);
+            this.flowLayoutPanel6.Controls.Add(this.label1);
+            this.flowLayoutPanel6.Controls.Add(this.label2);
+            this.flowLayoutPanel6.Controls.Add(this.label3);
+            this.flowLayoutPanel6.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel6.Location = new System.Drawing.Point(128, 3);
+            this.flowLayoutPanel6.Name = "flowLayoutPanel6";
+            this.flowLayoutPanel6.Size = new System.Drawing.Size(67, 187);
+            this.flowLayoutPanel6.TabIndex = 1;
             // 
             // label5
             // 
@@ -441,6 +429,20 @@
             this.label5.TabIndex = 16;
             this.label5.Text = "Hotkeys";
             // 
+            // flowLayoutPanel7
+            // 
+            this.flowLayoutPanel7.Controls.Add(this.gameProcessLabel);
+            this.flowLayoutPanel7.Controls.Add(this.gameProcessTextBox);
+            this.flowLayoutPanel7.Controls.Add(this.gameProcessIdLabel);
+            this.flowLayoutPanel7.Controls.Add(this.gameProcessIdTextBox);
+            this.flowLayoutPanel7.Controls.Add(this.sizeValueLabel);
+            this.flowLayoutPanel7.Controls.Add(this.readMemoryButton);
+            this.flowLayoutPanel7.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutPanel7.Location = new System.Drawing.Point(366, 25);
+            this.flowLayoutPanel7.Name = "flowLayoutPanel7";
+            this.flowLayoutPanel7.Size = new System.Drawing.Size(101, 141);
+            this.flowLayoutPanel7.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -448,7 +450,6 @@
             this.ClientSize = new System.Drawing.Size(478, 364);
             this.Controls.Add(this.flowLayoutPanel7);
             this.Controls.Add(this.flowLayoutPanel4);
-            this.Controls.Add(this.sizeValueLabel);
             this.Controls.Add(this.flowLayoutPanel3);
             this.Controls.Add(this.flowLayoutPanel2);
             this.Controls.Add(this.flowLayoutPanel1);
@@ -472,7 +473,6 @@
             this.flowLayoutPanel7.ResumeLayout(false);
             this.flowLayoutPanel7.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 

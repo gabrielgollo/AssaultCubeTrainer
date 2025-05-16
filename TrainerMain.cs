@@ -26,10 +26,8 @@ namespace AssaultCubeTrainer
         public Process gameProcess;
         public string gameProcessId;
         public Thread threadHacking;
-        // function that will be imported by another class and will receive the Entity and Size to be show in form
         public Func<Entity, Size, Boolean> UpdateStates;
 
-        // List of entities
         List<Entity> entities = new List<Entity>();
 
         public void TryStartHacking(string gameProcessName)
@@ -46,7 +44,6 @@ namespace AssaultCubeTrainer
                             Entity localPlayer = getLocalPlayer();
                             List<Entity> allPlayers = loadEntities();
 
-                            // should filter team
                             List<Entity> enemies = allPlayers.Where(p => (p.team >= 0 && p.team <=100 && p.hp > 0 && p.hp <= 100 && p.team != localPlayer.team)).ToList();
 
                             Size gameProcessWinSize = Drawing.GetSize(gameProcessName);
@@ -72,7 +69,6 @@ namespace AssaultCubeTrainer
                             Console.WriteLine(e.Message);
                         }
                     }
-                    //Thread.Sleep(10);
                 }
             });
 
@@ -87,25 +83,17 @@ namespace AssaultCubeTrainer
             {
                 try
                 {
-
-                    // Verifica se há inimigos
                     if (enemies.Count > 0)
                     {
-                        // Variáveis para armazenar o inimigo mais próximo
-                        
-
-                        // Obtém os endereços de memória para os ângulos de visão do jogador local
-                        string PlayerEntityMemoryHex = m.ReadInt(Offsets.offsetLocalPlayer).ToString("X");
+                       string PlayerEntityMemoryHex = m.ReadInt(Offsets.offsetLocalPlayer).ToString("X");
                        
                         string viewXAddress = Utils.SumOfHexStrings(PlayerEntityMemoryHex, Offsets.m_ViewAngleX);
                         string viewYAddress = Utils.SumOfHexStrings(PlayerEntityMemoryHex, Offsets.m_ViewAngleY);
-                        // Lê os valores atuais de pitch e yaw do jogador local
                         float currYaw = m.ReadFloat(viewXAddress); // de 0 a 360
                         float currPitch = m.ReadFloat(viewYAddress); // de -90 a 90
 
                         List<Vector2> ClosestPitchesAndYaws = new List<Vector2>();
 
-                        // Itera sobre todos os inimigos
                         foreach (Entity enemy in enemies)
                         {
                             if (enemy.hp < 0) continue;
@@ -115,15 +103,9 @@ namespace AssaultCubeTrainer
                             PointF screenPos = ESP.WorldToScreen(viewMatrix, enemy, gameProcessWinSize);
 
                             // Verificar se a posição está dentro da tela
-                            if (screenPos.X >= 0 && screenPos.X <= gameProcessWinSize.Width && screenPos.Y >= 0 && screenPos.Y <= gameProcessWinSize.Height && player.hp > 0)
-                            {
-                                
-
-                                //Console.WriteLine($"Current Pitch {currPitch}, Yaw: {currYaw}");
-                                // Calcula a distância 2D (usada para verificar se o inimigo está dentro da mira)
+                            if (screenPos.X >= 0 && screenPos.X <= gameProcessWinSize.Width && screenPos.Y >= 0 && screenPos.Y <= gameProcessWinSize.Height && player.hp > 0) {
+                            
                                 Aimbot.CalculateAim(player, enemy, out float targetPitch, out float targetYaw);
-                                // Depuração - Mostrar resultados
-                                //Console.WriteLine($"Targeting {enemy.name} at Pitch: {targetPitch:F6}, Yaw: {targetYaw:F6}");
                                 ClosestPitchesAndYaws.Add(new Vector2{ x=targetYaw, y=targetPitch,  } );
                             }
                         }
@@ -146,7 +128,6 @@ namespace AssaultCubeTrainer
                                 }
                             }
 
-                            // Atualiza os ângulos de visão do jogador local para o inimigo mais próximo
                             m.WriteMemory(viewXAddress, "float", closestTarget.x.ToString(CultureInfo.InvariantCulture));
                             m.WriteMemory(viewYAddress, "float", closestTarget.y.ToString(CultureInfo.InvariantCulture));
                         }
@@ -159,7 +140,6 @@ namespace AssaultCubeTrainer
                 }
                 catch (Exception e)
                 {
-                    // Captura e exibe qualquer erro ocorrido
                     Console.WriteLine($"Erro ao iniciar o aimbot: {e.Message}");
                 }
             }
@@ -167,9 +147,7 @@ namespace AssaultCubeTrainer
         public void StartEsp(Size gameProcessWinSize, Entity localPlayer, List<Entity> enemies)
         {
             if (EspEnabled)
-            {
-                    //Console.WriteLine($"x: {localPlayer.x} y: {localPlayer.y} z: {localPlayer.z}");
-                    
+            {                    
                     ViewMatrix viewMatrix = ESP.GetViewMatrix(m);
                     ESP.ShowESP(viewMatrix, enemies, localPlayer, gameProcessWinSize, gameProcess);
             }
@@ -187,7 +165,6 @@ namespace AssaultCubeTrainer
         {
             string localPlayerHex = m.ReadInt(Offsets.offsetLocalPlayer).ToString("X");
 
-            // read localplayer x,y,z and views
             float lpX, lpY, lpZ, lpViewX, lpViewY, lpFOV;
             string name = m.ReadString(Utils.SumOfHexStrings(localPlayerHex, Offsets.m_Name));
             lpX = m.ReadFloat(Utils.SumOfHexStrings(localPlayerHex, Offsets.m_XPos));
@@ -207,7 +184,6 @@ namespace AssaultCubeTrainer
 
         public List<Entity> loadEntities()
         {
-            // get list entity
             string entityList = m.ReadInt(Offsets.EntityList).ToString("x");
             int maxPlayers = 32;
 
@@ -216,8 +192,6 @@ namespace AssaultCubeTrainer
             {
                 string playerEntityHex = m.ReadInt(Utils.SumOfHexStrings(entityList, i.ToString("x"))).ToString("x");
 
-
-                // read positions x, y, z, hp and name dos jogadores
                 float x = m.ReadFloat(Utils.SumOfHexStrings(playerEntityHex, Offsets.m_XPos));
                 float y = m.ReadFloat(Utils.SumOfHexStrings(playerEntityHex, Offsets.m_YPos));
                 float z = m.ReadFloat(Utils.SumOfHexStrings(playerEntityHex, Offsets.m_ZPos));
