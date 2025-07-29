@@ -40,7 +40,5 @@ This project is intended for academic purposes and may serve as an introductory 
 
 ---
 
-📁 Repositório de código-fonte e artefatos: [link aqui, se desejar inserir]
-
 🧑‍🎓 Autor: Gabriel Santos Gollo do Amaral  
-🏫 IFMG - Campus Betim | 2024
+🏫 IFMG - Campus Betim | 2025
