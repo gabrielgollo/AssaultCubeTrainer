@@ -1,4 +1,4 @@
-# TCC - Engenharia Reversa e Manipulação de Memória em Jogos Digitais
+# TCC - Engenharia Reversa e Manipulação de Memória: Uma Abordagem Prática em Jogos Digitais
 
 <div align="center">
     <img align="center" height="405" width="720" src="https://github.com/gabrielgollo/AssaultCubeTrainer/blob/main/media/poc-demo-with-ac.gif?raw=true">
@@ -16,7 +16,6 @@ O estudo explora técnicas de **Engenharia Reversa** e **Manipulação de Memór
 - Foi implementada uma funcionalidade de ESP (percepção extra sensorial) com leitura em tempo real.
 - Utilizou-se escaneamento de ponteiros para lidar com endereços dinâmicos.
 - A ausência de anti-cheat no *Assault Cube* facilitou a execução da prova de conceito.
-- O trabalho reforça a importância de discutir as implicações éticas e de segurança envolvidas.
 
 O projeto está disponível para fins acadêmicos, com código-fonte aberto para estudo e reprodutibilidade.
 
@@ -34,7 +33,6 @@ The study explores **Reverse Engineering** and **Memory Manipulation** technique
 - An ESP (Extra Sensory Perception) feature was implemented with real-time data reading.
 - Pointer scanning was used to handle dynamic memory addressing.
 - The absence of anti-cheat systems in *Assault Cube* simplified memory access.
-- The work emphasizes the ethical and security implications of these techniques.
 
 This project is intended for academic purposes and may serve as an introductory guide to hands-on reverse engineering. All source code and materials are available in this repository.
 
