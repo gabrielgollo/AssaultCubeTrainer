@@ -1,6 +1,6 @@
 # TCC - Engenharia Reversa e Manipulação de Memória em Jogos Digitais
 
-[Demonstração do programa](https://github.com/gabrielgollo/AssaultCubeTrainer/blob/main/media/poc-demo-with-ac.gif)
+![Demonstração do programa](https://github.com/gabrielgollo/AssaultCubeTrainer/blob/main/media/poc-demo-with-ac.gif)
 
 ## 📌 Sobre o Projeto (PT-BR)
 
