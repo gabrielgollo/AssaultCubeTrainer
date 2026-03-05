@@ -1,0 +1,97 @@
+{
+  "_comment": "Template for creating new game profiles",
+  "gameName": "Your Game Name",
+  "processName": "game_process_name",
+  "offsets": {
+    "localPlayer": "processName+OFFSET",
+    "entityList": "processName+OFFSET",
+    "viewMatrix": "processName+OFFSET",
+    "player": {
+      "position": {
+        "x": "0xOFFSET",
+        "y": "0xOFFSET",
+        "z": "0xOFFSET"
+      },
+      "rotation": {
+        "yaw": "0xOFFSET",
+        "pitch": "0xOFFSET"
+      },
+      "attributes": {
+        "health": "0xOFFSET",
+        "armor": "0xOFFSET",
+        "ammo": "0xOFFSET",
+        "grenades": "0xOFFSET"
+      },
+      "info": {
+        "name": "0xOFFSET",
+        "team": "0xOFFSET",
+        "fov": "0xOFFSET"
+      }
+    }
+  },
+  "gameSettings": {
+    "maxPlayers": 32,
+    "entityListStride": 4,
+    "entityListStartOffset": 4,
+    "playerHeight": 8.0,
+    "headHeight": 2.2
+  },
+  "features": {
+    "aimbot": {
+      "enabled": false,
+      "smoothing": 0.0,
+      "fovLimit": 180.0,
+      "targetBone": "head",
+      "invertPitch": false,
+      "requireVisible": true,
+      "requireOnScreen": false,
+      "headOffset": 0.0,
+      "axisMode": "auto",
+      "matrixOrder": "auto",
+      "angleUnit": "deg",
+      "yawOffset": 90.0,
+      "allowOppositeYawOffset": false,
+      "yawRangeMin": 0.0,
+      "yawRangeMax": 360.0,
+      "pitchRangeMin": -90.0,
+      "pitchRangeMax": 90.0,
+      "normalizeYaw": true,
+      "clampPitch": true,
+      "strictPitchLimits": false,
+      "swapYawPitch": false,
+      "simpleAngleDiff": false,
+      "autoPitchSign": false,
+      "swapAxisYZ": false,
+      "maxPitch": 89.0,
+      "maxTargetDistance": 300.0,
+      "maxSnapAngle": 85.0,
+      "aimMode": "angle",
+      "angleAlgorithm": "adaptive",
+      "writeCulture": "current",
+      "maxScreenDistance": 400.0,
+      "screenGain": 0.35,
+      "screenYawSign": 1.0,
+      "screenPitchSign": 1.0,
+      "maxYawStep": 8.0,
+      "maxPitchStep": 6.0,
+      "minTargetDistance": 2.0,
+      "targetLock": true,
+      "diagnostics": {
+        "enabled": false,
+        "logOnly": false,
+        "intervalMs": 250,
+        "logPath": "Logs/aimbot-diagnostics.log"
+      }
+    },
+    "esp": {
+      "enabled": false,
+      "boxes": true,
+      "boxScale": 1.0,
+      "yOffsetPx": 0.0,
+      "axisMode": "zup"
+    },
+    "attributeKeeper": {
+      "enabled": false
+    }
+  }
+}

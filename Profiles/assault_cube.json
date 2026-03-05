@@ -1,0 +1,106 @@
+{
+  "gameName": "Assault Cube",
+  "processName": "ac_client.exe",
+  "offsets": {
+    "localPlayer": "processName+18AC00",
+    "entityList": "processName+18AC04",
+    "viewMatrix": "processName+17DFD0",
+    "player": {
+      "position": {
+        "x": "0x4",
+        "y": "0x8",
+        "z": "0xC"
+      },
+      "rotation": {
+        "yaw": "0x34",
+        "pitch": "0x38"
+      },
+      "attributes": {
+        "health": "0xEC",
+        "armor": "0xF0",
+        "ammo": "0x140",
+        "grenades": "0x144",
+        "kills": "0x1DC"
+      },
+      "info": {
+        "name": "0x205",
+        "team": "0x30C",
+        "fov": "0x334",
+        "fovScoped": "0x338"
+      }
+    }
+  },
+  "gameSettings": {
+    "maxPlayers": 32,
+    "entityListStride": 4,
+    "entityListStartOffset": 4,
+    "playerHeight": 8.0,
+    "headHeight": 2.2
+  },
+  "features": {
+    "aimbot": {
+      "enabled": false,
+      "smoothing": 0.0,
+      "fovLimit": 180.0,
+      "targetBone": "head",
+      "invertPitch": false,
+      "requireVisible": false,
+      "requireOnScreen": true,
+      "headOffset": 0.0,
+      "axisMode": "zup",
+      "matrixOrder": "column",
+      "angleUnit": "deg",
+      "yawOffset": 90.0,
+      "allowOppositeYawOffset": false,
+      "yawRangeMin": 0.0,
+      "yawRangeMax": 360.0,
+      "pitchRangeMin": -89.0,
+      "pitchRangeMax": 89.0,
+      "normalizeYaw": true,
+      "clampPitch": true,
+      "strictPitchLimits": true,
+      "swapYawPitch": false,
+      "simpleAngleDiff": true,
+      "autoPitchSign": false,
+      "swapAxisYZ": false,
+      "maxPitch": 89.0,
+      "maxTargetDistance": 300.0,
+      "maxSnapAngle": 180.0,
+      "aimMode": "angle",
+      "angleAlgorithm": "adaptive",
+      "writeCulture": "current",
+      "maxScreenDistance": 600.0,
+      "screenGain": 0.30,
+      "screenYawSign": 1.0,
+      "screenPitchSign": -1.0,
+      "maxYawStep": 360.0,
+      "maxPitchStep": 179.0,
+      "minTargetDistance": 2.0,
+      "targetLock": false,
+      "diagnostics": {
+        "enabled": true,
+        "logOnly": false,
+        "intervalMs": 250,
+        "logPath": "C:\\Gabriel\\Development-work\\gabrielgit\\AssaultCubeTrainer\\Logs\\aimbot-diagnostics.log"
+      }
+    },
+    "esp": {
+      "enabled": false,
+      "boxes": true,
+      "healthBars": true,
+      "names": true,
+      "distance": true,
+      "boxScale": 0.60,
+      "yOffsetPx": 25.0,
+      "axisMode": "zup",
+      "matrixOrder":  "column",
+      "maxDistance": 220.0
+    },
+    "attributeKeeper": {
+      "enabled": false,
+      "keepHealth": true,
+      "keepAmmo": true,
+      "keepGrenades": true
+    }
+  }
+}
